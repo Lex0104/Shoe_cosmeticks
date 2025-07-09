@@ -9,8 +9,13 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import os
+import sys
 
 from pathlib import Path
+from datetime import timedelta
+
+from environs import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-pp%svr4780u1!_$-!c*2euv4k*)y9hd=s&wd$5z9atzem#l2+&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -37,7 +42,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]
+    "bootstrap.bundle.min.js",
+    "image_cropping",
+    "phonenumber_field",
+    "django_celery_beat",
+    "widget_tweaks",
+    "restaurant",
+    "users",
+    ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -74,9 +87,13 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.getenv("POSTGRES_DB"),
+        'USER': os.getenv("POSTGRES_USER"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT', default='5433'),
     }
 }
 
@@ -115,9 +132,69 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+THUMBNAIL_PROCESSORS = ("image_cropping.thumbnail_processors.crop_corners",)
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+HOST = env('EMAIL_HOST')
+PORT = env.int ( 'EMAIL_PORT' )
+USE_TLS = env.bool( 'EMAIL_USE_TLS' )
+USE_SSL = env.bool("EMAIL_USE_SSL")
+HOST_USER = env("EMAIL_HOST_USER")
+HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = HOST_USER
+
+EMAIL_ADMIN = env("EMAIL_ADMIN")
+FEEDBACK_EMAIL = env("FEEDBACK_EMAIL")
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")
+
+CELERY_TIMEZONE = TIME_ZONE
+
+CELERY_TASK_TRACK_STARTED = True
+
+CELERY_BEAT_SCHEDULE = {
+    "send_mail_reservation_reminder": {
+        "task": "users.tasks.send_mail_reservation_reminder",
+        "schedule": timedelta(minutes=20),
+    },
+    "check_reservation": {
+        "task": "restaurant.tasks.check_reservation",
+        "schedule": timedelta(minutes=30),
+    },
+}
+
+CACHE_ENABLED = True
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": env("CACHES_LOCATION"),
+        }
+    }
+
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db.sqlite3",
+        }
+    }
+

@@ -1,0 +1,141 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+Профиль {{ user.email }}
+{% endblock %}
+
+{% block content %}
+<main class="default-background">
+    <div class="container py-5 mt-5">
+        <div class="rounded-4 shadow-lg p-5" style="background-color: rgba(255, 255, 255, 0.9);">
+            <div class="text-center">
+                <h1>
+                    Профиль
+                </h1>
+              <p>Это ваш профиль. Здесь вы можете посмотреть вашу информацию, историю бронирования столиками, а также изменить </p>
+                  <p>или отменить текущие забронированные столики.</p>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                    <div class="py-4">
+                        <p><strong>Email: </strong>{{ user.email }}</p>
+                        <p><strong>Номер телефона: </strong>{{ user.phone_number|default:"-" }}</p>
+                        <p><strong>Имя: </strong>{{ user.first_name|default:'-' }}</p>
+                        <p><strong>Фамилия: </strong>{{ user.last_name|default:'-' }}</p>
+                        <a class="link" href="/user/{{ user.id }}/update/">
+                            Редактировать профиль
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12">
+                <table class="table caption-top">
+                    <caption class=" text-white">
+                        История бронирования столиков
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                          <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                          <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                        </svg>
+                    </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Дата</th>
+                      <th scope="col">Время</th>
+                      <th scope="col">Столик</th>
+                      <th scope="col">Количество мест</th>
+                      <th scope="col">Комментарий</th>
+                      <th scope="col">Активная</th>
+                      <th scope="col">Изменить</th>
+                      <th scope="col">Отменить</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for reservation in page_obj %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td>{{ reservation.date|date:"d.m.Y" }}</td>
+                      <td>{{ reservation.time|time:"H:i" }}</td>
+                      <td>{{ reservation.table.number }}</td>
+                      <td>{{ reservation.table.number_of_seats }}</td>
+                      <td>{{ reservation.comment|default:"-" }}</td>
+                      <td>
+                          {% if reservation.is_active %}
+                              <span class="badge bg-success">Да</span>
+                          {% else %}
+                              <span class="badge bg-danger">Нет</span>
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if reservation.is_active %}
+                              <a href="{% url 'restaurant:reservation_update' pk=reservation.pk %}" class="btn btn-sm btn-primary">Изменить</a>
+                          {% else %}
+                              <button class="btn btn-sm btn-secondary" disabled>Изменить</button>
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if reservation.is_active %}
+                              <a href="{% url 'restaurant:reservation_delete' pk=reservation.pk %}" class="btn btn-sm btn-danger">Отменить</a>
+                          {% else %}
+                              <button class="btn btn-sm btn-secondary" disabled>Отменить</button>
+                          {% endif %}
+                      </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                      <td colspan="9" class="text-center">У вас пока нет активных бронирований.</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div class="d-flex justify-content-center mt-4">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">&laquo;</span>
+                                </li>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">&raquo;</span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

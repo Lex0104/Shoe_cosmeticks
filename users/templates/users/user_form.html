@@ -1,0 +1,29 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+Редактируйте свой профиль
+{% endblock %}
+
+{% block content %}
+<main class="default-background d-flex justify-content-center align-items-center">
+    <div class="text-white">
+        <div class="text-center mt-5 p-5">
+            <h1>
+                Здесь вы можете отредактировать свой профиль.
+            </h1>
+        </div>
+        <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+            <div class="d-flex justify-content-center py-3">
+                <div class="col-4">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                    <a class="link" href="/">
+                        <button type="button" class="btn btn-danger">Отмена</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'restaurant/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+Вход
+{% endblock %}
+
+{% block content %}
+<main class="default-background d-flex justify-content-center align-items-center">
+    <div>
+        <div class="text-center text-white p-5 mt-5">
+            <h1>
+                Введите данные для входа
+            </h1>
+        </div>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="d-flex flex-column text-white align-items-center justify-content-center py-3">
+                <div class="form-group mb-3">
+                    <label for="{{ form.username.id_for_label }}">Email:</label>
+                    {{ form.username|add_class:"form-control" }}
+                    {% if form.username.errors %}
+                        <div class="text-danger">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="{{ form.password.id_for_label }}">Пароль:</label>
+                    {{ form.password|add_class:"form-control" }}
+                    {% if form.password.errors %}
+                        <div class="text-danger">{{ form.password.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-success">Войти</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

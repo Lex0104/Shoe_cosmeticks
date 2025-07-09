@@ -1,0 +1,95 @@
+.section-description {
+    min-height: 100vh;
+    background: url('../images/bg.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
+.section-services {
+    min-height: 80vh;
+    background: url('../images/hall.webp') center center/cover no-repeat;
+    position: relative;
+}
+
+.section-contacts {
+    min-height: 60vh;
+    background: url('../images/bg5new.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
+.section-title {
+    min-height: 60vh;
+    background: url('../images/bg-title.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
+.section-administration {
+    min-height: 60vh;
+    background: url('../images/bg-administration.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
+.section-kitchen {
+    min-height: 60vh;
+    background: url('../images/bg-kitchen.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
+.section-hall {
+    min-height: 60vh;
+    background: url('../images/bg-hall.jpg') center center/cover no-repeat;
+    position: relative;
+}
+
+.default-background {
+    min-height: 100vh;
+    background: url('../images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    width: 100%;
+}
+
+.reservation-background {
+    min-height: 100vh;
+    background: url('../images/table.jpg') no-repeat center center fixed;
+    background-size: cover;
+    width: 100%;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+a.mt-auto svg {
+  animation: bounce 2s infinite;
+}
+
+.team-section {
+    margin-bottom: 3rem;
+}
+
+.team-title {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

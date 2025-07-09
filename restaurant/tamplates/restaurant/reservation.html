@@ -1,0 +1,61 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+Бронирование
+{% endblock %}
+
+{% block content %}
+<main class="reservation-background py-5">
+  <div class="container" style="max-width: 1400px;">
+    <div class="album bg-body-tertiary m-5 py-5">
+        <div class="text-center mb-5">
+          <h1 class="display-6">Бронирование столиков</h1>
+        </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 m-5">
+        {% for table in tables %}
+        <div class="col">
+          <div class="card shadow-sm">
+            {% if table.image %}
+            <img src="{{ table.image.url }}" class="card-img-top" alt="Столик {{ table.number }}">
+            {% else %}
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            {% endif %}
+            <div class="card-body">
+              <p class="card-text">Столик №{{ table.number }} на {{ table.number_of_seats }} гостей</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="?table_id={{ table.id }}#reservation-form" class="btn btn-sm btn-outline-secondary">
+                  Забронировать
+                </a>
+                <a href="/table/{{ table.id }}/" class="btn btn-sm btn-outline-secondary">
+                  Доступность
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-column col-md-12 justify-content-center align-items-center text-white">
+    <div class="card" style="padding: 20px; background-color: rgba(255, 255, 255, 0.93);">
+      <h3 id="reservation-form" class="text-center">Форма резерва</h3>
+      <form method="post" action="#reservation-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Забронировать</button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
+<script>
+window.addEventListener('load', function() {
+  if (window.location.hash === '#reservation-form') {
+    const target = document.getElementById('reservation-form');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+});
+</script>

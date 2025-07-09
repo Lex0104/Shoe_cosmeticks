@@ -1,0 +1,107 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block content %}
+<section id="description" class="section-description vh-100 d-flex flex-column text-center text-white">
+  <div class="p-5 m-5">
+    <h1 class="display-3">Добро пожаловать на страницу самого лучшего ресторана во всей галактике!</h1>
+  </div>
+  <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+    <p>Очень классное описание ресторана! Прям пальчики оближешь! Прям чувствую вкус представляемой еды!</p>
+    <a href="/reservation/" class="btn btn-dark mb-4">Забронировать столик</a>
+  </div>
+  <a href="#services" class="mt-auto d-flex justify-content-center mb-3" style="color: white">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+    </svg>
+  </a>
+</section>
+<section id="services" class="section-services vh-100 d-flex flex-column justify-content-center text-white">
+  <div class="w-100 d-flex justify-content-center mt-4 mt-auto mb-3 py-5">
+    <a href="#description" class="mt-auto" style="color: black">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+      </svg>
+    </a>
+  </div>
+  <div class="flex-grow-1 d-flex flex-column justify-content-center align-items-start" style="max-width: 500px; margin-left: 30vw;">
+    <div class="card" style="padding: 20px; width: 20rem; background-color: rgba(255, 255, 255, 0.93);">
+      <div class="card-header text-center">
+        <h2 class="display-6">Наши услуги</h2>
+      </div>
+      <ul class="fs-4 px-3">
+        <li><em>Банкеты</em></li>
+        <li><em>Корпоративы</em></li>
+        <li><em>Живая музыка</em></li>
+        <li><em>Детское меню</em></li>
+        <li><em>Доставка</em></li>
+        <li><em>Кейтеринг</em></li>
+        <li><em>VIP-залы</em></li>
+      </ul>
+    </div>
+  </div>
+  <div class="w-100 d-flex justify-content-center mt-4 mt-auto mb-3">
+    <a href="#contacts" class="mt-auto" style="color: white">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+      </svg>
+    </a>
+  </div>
+</section>
+<section id="contacts" class="section-contacts vh-100 d-flex flex-column justify-content-center align-items-center text-white">
+  <div class="w-100 d-flex justify-content-center mt-auto py-5">
+    <a href="#services" class="mt-auto position-absolute top-0 start-50 translate-middle-x py-5" style="color: black">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+      </svg>
+    </a>
+  </div>
+  <div class="flex-grow-1 d-flex flex-column justify-content-center">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card" style="padding: 20px; width: 17rem; height: 22rem; background-color: rgba(255, 255, 255, 0.93);">
+          <h3 class="text-center">Контактная информация</h3>
+          <p>Почта: example@mail.com</p>
+          <p>Телефон: +7 (999) 123-45-67</p>
+          <p>Адрес: г. Москва, ул. Примерная, д. 1</p>
+          <p>Работаем 24/7</p>
+          <div class="py-2">
+            <p>
+              <a href="#" class="link-dark m-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+                </svg>
+              </a>
+              <a href="#" class="link-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                </svg>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card" style="padding: 20px; width: 30rem; height: 22rem; background-color: rgba(255, 255, 255, 0.93);">
+          <h3>Форма обратной связи</h3>
+          <form method="post" action="/">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="email" class="form-label">Почта</label>
+              <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Сообщение</label>
+              <textarea class="form-control" id="message" rows="3" name="message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
