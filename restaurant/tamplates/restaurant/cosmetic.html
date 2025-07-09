@@ -1,0 +1,27 @@
+<!-- templates/cosmetic.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Косметика по уходу за обувью</h1>
+
+<p>Здесь вы можете ознакомиться с нашими товарами и выбрать подходящие средства.</p>
+
+<!-- Можно добавить список товаров или изображений -->
+<div class="row">
+  <!-- Пример карточки товара -->
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <img src="/static/images/shoe_cleaner.jpg" class="card-img-top" alt="Очиститель обуви">
+      <div class="card-body">
+        <h5 class="card-title">Очиститель обуви</h5>
+        <p class="card-text">Эффективное средство для чистки вашей обуви.</p>
+        <!-- Можно добавить кнопку купить или подробнее -->
+        <!-- <a href="#" class='btn btn-primary'>Купить</a> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Еще карточки по необходимости -->
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+Отмена бронирования
+{% endblock %}
+
+{% block content %}
+<main class="default-background d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="text-white py-5" style="max-width: 500px; width: 100%;">
+    <h1 class="mb-4 text-center" id="reservation-form"><strong>Отмена брони</strong></h1>
+    <form method="post" action="#reservation-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-danger">Отменить</button>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

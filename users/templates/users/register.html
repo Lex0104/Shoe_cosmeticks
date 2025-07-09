@@ -1,0 +1,28 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block content %}
+<main class="default-background d-flex justify-content-center align-items-center">
+    <div class="container py-5 mt-5" style="width: 51rem;">
+        <div class="rounded-4 shadow-lg p-5" style="background-color: rgba(255, 255, 255, 0.9);">
+            <div class="text-center">
+                <h1>
+                    Введите данные для регистрации
+                </h1>
+            </div>
+            <form method="post" action="" class="form-floating">
+                <div class="d-flex justify-content-center py-3">
+                    <div class="col-6">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">Регистрация</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

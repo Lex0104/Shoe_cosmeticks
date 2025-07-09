@@ -1,0 +1,43 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}Столик №{{ object.number }}{% endblock %}
+
+{% block content %}
+<main class="default-background d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row justify-content-center d-flex py-5">
+            <div class="col-6 text-center py-4 px-5">
+                <div class="card" style="border: 2px solid white;">
+                    <div class="card-header">
+                        <h3>Столик № {{ object.number }}</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if object.image %}
+                            <p><img src="{{ object.image.url }}" class="img" style="width: 370px" alt="Столик №{{ object.number }}"></p>
+                        {% else %}
+                            <p>Изображение отсутствует</p>
+                        {% endif %}
+                        <p>Количество мест: {{ object.number_of_seats }}</p>
+                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                            <div class="dropend mb-2">
+                                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Свободные даты и время для бронирования:
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% load l10n %}
+                                    {% for slot in free_slots %}
+                                    <li><span class="dropdown-item-text">{{ slot.date|date:"j E Y" }} в {{ slot.time }}</span></li>
+                                    {% empty %}
+                                    <li>Нет доступных слотов на ближайшую неделю.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <a class="btn btn-dark" href="/reservation/?table_id={{ object.id }}#reservation-form">Забронировать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
