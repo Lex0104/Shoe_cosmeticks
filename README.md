@@ -29,7 +29,7 @@
 
 1. Клонируйте репозиторий
 ```
-
+git@github.com:Lex0104/saphir_diplom.git
 ```
 
 2. Поскольку проект использует Docker, необходимо установить [Docker](https://www.docker.com/products/docker-desktop/)
